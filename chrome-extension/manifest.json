@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Chart Wallpaper \u2014 Local & Free",
+  "version": "1.0.0",
+  "minimum_chrome_version": "111",
+  "description": "Local animated wallpapers behind TradingView candles. No account, uploads, or subscription.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "action": {
+    "default_title": "Chart Wallpaper",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tradingview.com/*"
+      ],
+      "js": [
+        "canvas.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://*.tradingview.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

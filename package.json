@@ -1,0 +1,13 @@
+{
+  "name": "tradingview-animated-wallpaper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free local animated wallpapers behind TradingView charts: actual macOS Desktop companion and Chrome Manifest V3 extension.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/vladimirdd96/tradingview-animated-wallpaper.git" },
+  "homepage": "https://github.com/vladimirdd96/tradingview-animated-wallpaper#readme",
+  "bugs": { "url": "https://github.com/vladimirdd96/tradingview-animated-wallpaper/issues" },
+  "keywords": ["tradingview", "tradingview-desktop", "animated-wallpaper", "live-wallpaper", "chart-background", "chrome-extension", "macos", "electron", "mp4", "webm"],
+  "engines": { "node": ">=22" },
+  "scripts": { "check": "node scripts/check.mjs", "build": "python3 scripts/build_release.py" }
+}
