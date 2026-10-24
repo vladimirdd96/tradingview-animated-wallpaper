@@ -12,7 +12,7 @@ Start with `README.md`, `llms.txt`, `docs/compatibility.md`, and the target pack
 - Never launch, quit, restart, log out of, or reload a user's Desktop app merely to test wallpaper. The launcher attaches to the existing normal process.
 - Do not patch the application bundle, signature, Electron fuses, or system protections to force compatibility.
 - Do not touch trades, broker controls, accounts, cookies, saved chart preferences, or strategies.
-- Never commit user media, screenshots, profiles, runtime.json, settings.json, wallpaper.bin, tokens, or absolute personal paths. The small generated QA WebM is intentionally included.
+- Never commit user media, screenshots, profiles, runtime.json, settings.json, wallpaper.bin, tokens, or absolute personal paths. The small generated QA WebM is intentionally included. The creator explicitly approved the cropped public demo in `docs/media/desktop-demo.gif` and the linked release MP4; this narrow exception does not authorize publishing other user media.
 - Keep loopback binding, process ownership checks, token/origin/host checks, and inspector cleanup intact.
 - Desktop integration tests temporarily change wallpaper. Run them only with explicit authorization for the active local session. Offline checks do not need a running app.
 

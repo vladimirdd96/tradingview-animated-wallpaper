@@ -6,6 +6,12 @@
 
 An independent, MIT-licensed project for **TradingView live wallpapers**, **animated candlestick chart backgrounds**, and **custom video wallpapers**. The Desktop companion works inside the actual TradingView Desktop application; it is not a Chrome shortcut or replacement trading client. The Chrome package is a Manifest V3 browser extension.
 
+## Video demo: actual TradingView Desktop
+
+[![Animated Naruto wallpaper behind TradingView Desktop candlesticks](docs/media/desktop-demo.gif)](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/download/v1.1.1/tradingview-desktop-animated-wallpaper-demo.mp4)
+
+[Watch or download the 10-second MP4 demo](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/download/v1.1.1/tradingview-desktop-animated-wallpaper-demo.mp4). Recorded from the actual running macOS Desktop app with a user-selected animated wallpaper, cropped to the chart. The original wallpaper file is not included. [Demo details and artwork notice](docs/media/README.md).
+
 ## Choose your version
 
 | | TradingView Desktop companion | Google Chrome extension |
@@ -71,7 +77,7 @@ These are recorded tests, not a promise of compatibility with all future Trading
 
 ### Can I use an animated Naruto wallpaper on TradingView?
 
-Yes, select your own local MP4, WebM, or animated image. No Naruto video or other copyrighted wallpaper library is bundled. Desktop testing included a user-provided 4K MP4; only a small project-generated WebM test fixture is in the source tree.
+Yes, select your own local MP4, WebM, or animated image. No Naruto video or other copyrighted wallpaper library is bundled. Desktop testing included a user-provided 4K MP4; the source tree includes a cropped demonstration preview and a small project-generated WebM test fixture.
 
 ### Is this a free ChartSkins alternative?
 

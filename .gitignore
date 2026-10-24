@@ -16,3 +16,6 @@ wallpaper.bin*
 *.webp
 *.webm
 !desktop/qa/sample.webm
+
+# Explicitly approved, cropped public demonstration only.
+!docs/media/desktop-demo.gif
