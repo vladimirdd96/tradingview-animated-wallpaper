@@ -12,7 +12,7 @@ PACKAGES = {
         'options.html', 'options.js', 'ui.css', 'README.md', 'LICENSE',
     ]),
     'TradingView-Desktop-Wallpaper.zip': ('desktop', 'TradingViewDesktopWallpaper', [
-        'attach.cjs', 'main.cjs', 'renderer.js', 'index.html', 'ui.js', 'ui.css',
+        'attach.cjs', 'main.cjs', 'renderer.js', 'menu.js', 'index.html', 'ui.js', 'ui.css',
         'Enable Desktop Wallpaper.command', 'README.md', 'LICENSE',
         'qa/evaluate.cjs', 'qa/test.cjs', 'qa/sample.webm',
     ]),

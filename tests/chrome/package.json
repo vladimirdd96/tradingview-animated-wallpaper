@@ -1,1 +1,11 @@
-{"private":true,"scripts":{"test":"node extension.cjs"},"devDependencies":{"playwright":"1.62.1"}}
+{
+  "private": true,
+  "scripts": {
+    "test": "node extension.cjs",
+    "test:desktop-menu": "node desktop-menu.cjs",
+    "test:desktop-settings": "node desktop-settings.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

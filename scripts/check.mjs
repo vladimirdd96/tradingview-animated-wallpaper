@@ -6,10 +6,12 @@ const root=path.resolve(import.meta.dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>['.git','node_modules','dist','artifacts','data'].includes(e.name)?[]:e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 const manifest=JSON.parse(read('chrome-extension/manifest.json'));
-assert.equal(manifest.manifest_version,3);assert.equal(manifest.version,JSON.parse(read('package.json')).version);
+assert.equal(manifest.manifest_version,3);assert(/^\d+\.\d+\.\d+$/.test(manifest.version));
 for(const entry of manifest.content_scripts){for(const file of [...(entry.js||[]),...(entry.css||[])])assert(fs.existsSync(path.join(root,'chrome-extension',file)),`Manifest asset missing: ${file}`);assert(entry.matches.every(m=>m==='https://*.tradingview.com/*'));}
 for(const file of [manifest.action.default_popup,manifest.options_page])assert(fs.existsSync(path.join(root,'chrome-extension',file)));
 assert.deepEqual([...manifest.permissions].sort(),['storage','unlimitedStorage'].sort());
+const version=JSON.parse(read('package.json')).version;
+for(const file of ['desktop/attach.cjs','desktop/main.cjs'])assert(read(file).includes(`COMPANION_VERSION='${version}'`),`${file} companion version mismatch`);
 let scripts=0;
 for(const file of walk(root)){
  const rel=path.relative(root,file);

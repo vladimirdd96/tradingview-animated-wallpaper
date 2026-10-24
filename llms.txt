@@ -9,7 +9,7 @@ Two distinct packages are included. The Desktop companion attaches to the actual
 ## Install and use
 
 - [Overview and downloads](https://github.com/vladimirdd96/tradingview-animated-wallpaper/blob/main/README.md): package selection, features, quick start, and FAQ.
-- [Desktop setup and wallpaper controls](https://github.com/vladimirdd96/tradingview-animated-wallpaper/blob/main/desktop/README.md): attach to an already-running app; reopen controls by running Enable Desktop Wallpaper.command again.
+- [Desktop setup and wallpaper controls](https://github.com/vladimirdd96/tradingview-animated-wallpaper/blob/main/desktop/README.md): attach to an already-running app; reopen controls with the top-right three-dot menu → Wallpaper settings…. Run Enable Desktop Wallpaper.command once after an app restart to reattach.
 - [Chrome extension setup](https://github.com/vladimirdd96/tradingview-animated-wallpaper/blob/main/chrome-extension/README.md): Load unpacked using the directory containing manifest.json; choose a custom wallpaper through the popup.
 - [Downloads](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest): separate no-build Desktop and Chrome ZIP assets.
 

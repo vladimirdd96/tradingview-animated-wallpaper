@@ -1,10 +1,17 @@
 'use strict';
 const fs=require('node:fs/promises'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto');
-const {app,BrowserWindow,webContents}=require('electron');
+const {app,BrowserWindow,webContents,ipcMain,nativeTheme}=require('electron');
+const {pathToFileURL}=require('node:url');
+const COMPANION_VERSION='1.1.1';
+const MENU_CHANNEL='tv-wallpaper:open-settings:v1';
+function menuURL(url){
+ try{const u=new URL(url);return u.protocol==='file:'&&u.pathname===new URL(pathToFileURL(path.join(app.getAppPath(),'app/menu/index.html')).href).pathname&&JSON.parse(u.searchParams.get('rendererInitialData')).type==='main-menu';}catch{return false;}
+}
 const KEY='__tvDesktopWallpaperCompanionV1';
 const chartURL=url=>/^https:\/\/([a-z0-9-]+\.)?tradingview\.com\/chart\//i.test(url);
 module.exports=async function install(assets){
- if(global[KEY]){global[KEY].show();return global[KEY].state();}
+ if(global[KEY]?.version===COMPANION_VERSION){global[KEY].show();return global[KEY].state();}
+ if(global[KEY]){if((await global[KEY].state()).busy)throw Error('Wait for the current wallpaper change before upgrading.');await global[KEY].stop();}
  const data=path.join(app.getPath('userData'),'ChartWallpaper');await fs.mkdir(data,{recursive:true,mode:0o700});
  let config={enabled:true,dim:.45,paused:false,fit:'cover',name:'Built-in aurora',kind:'aurora'},media=null;
  try{const saved=JSON.parse(await fs.readFile(path.join(data,'settings.json'),'utf8'));config={...config,...saved};if(config.mime)media=await fs.readFile(path.join(data,'wallpaper.bin'));}catch(e){if(e.code!=='ENOENT')console.warn('Wallpaper settings reset:',e.message);}
@@ -24,9 +31,18 @@ module.exports=async function install(assets){
    const status=await w.executeJavaScript(script);statuses.set(w.id,status);await repaint(w);return status;
   }catch(e){statuses.set(w.id,{ready:0,errors:[e.message]});return {ready:0,errors:[e.message]};}
  }
+ async function applyMenu(w){
+  if(stopping||w.isDestroyed()||!menuURL(w.getURL()))return;
+  try{await w.executeJavaScript(assets['menu.js']);}catch(e){console.warn('Wallpaper menu could not attach:',e.message);}
+ }
+ function openMenuSettings(event){
+  if(stopping||!base||!hooked.has(event.sender.id)||!menuURL(event.sender.getURL()))return;
+  void event.sender.executeJavaScript('window.hideMenu?.()').catch(()=>{});
+  show();
+ }
  function hook(w){
   if(hooked.has(w.id))return;
-  const finish=()=>{if(chartURL(w.getURL()))void apply(w);};
+  const finish=()=>{if(chartURL(w.getURL()))void apply(w);else if(menuURL(w.getURL()))void applyMenu(w);};
   const destroyed=()=>{hooked.delete(w.id);statuses.delete(w.id);};
   hooked.set(w.id,{w,finish,destroyed});w.on('did-finish-load',finish);w.once('destroyed',destroyed);
  }
@@ -38,18 +54,26 @@ module.exports=async function install(assets){
  }
  async function state(){
   for(const w of charts())try{statuses.set(w.id,await w.executeJavaScript('window.__tvDesktopWallpaper?.status()??{ready:0,errors:["Wallpaper has not attached yet"]}'));}catch{}
-  return {pid:process.pid,version:app.getVersion(),settings:{...config},charts:charts().map(w=>({id:w.id,...statuses.get(w.id)})),busy};
+  return {theme:nativeTheme.shouldUseDarkColors?'dark':'light',pid:process.pid,version:app.getVersion(),companionVersion:COMPANION_VERSION,settings:{...config},charts:charts().map(w=>({id:w.id,...statuses.get(w.id)})),busy};
+ }
+ function syncTheme(){
+  if(!settingsWindow||settingsWindow.isDestroyed())return;
+  const theme=nativeTheme.shouldUseDarkColors?'dark':'light';
+  settingsWindow.setBackgroundColor(theme==='dark'?'#1f1f1f':'#ffffff');
+  void settingsWindow.webContents.executeJavaScript(`window.__tvWallpaperSetTheme?.(${JSON.stringify(theme)})`).catch(()=>{});
  }
  function show(){
   if(settingsWindow&&!settingsWindow.isDestroyed()){settingsWindow.show();settingsWindow.focus();return;}
-  settingsWindow=new BrowserWindow({title:'TradingView Desktop Wallpaper',width:620,height:780,minWidth:440,minHeight:540,backgroundColor:'#10141d',autoHideMenuBar:true,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true}});
+  settingsWindow=new BrowserWindow({title:'Wallpaper settings',width:560,height:720,minWidth:440,minHeight:580,backgroundColor:nativeTheme.shouldUseDarkColors?'#1f1f1f':'#ffffff',autoHideMenuBar:true,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true}});
   settingsWindow.webContents.setWindowOpenHandler(()=>({action:'deny'}));
   settingsWindow.webContents.on('will-navigate',(event,url)=>{if(!url.startsWith(base))event.preventDefault();});
+  settingsWindow.webContents.on('did-finish-load',syncTheme);
   settingsWindow.on('closed',()=>{settingsWindow=null;});void settingsWindow.loadURL(base);
  }
  async function stop(){
-  if(stopping)return;stopping=true;app.removeListener('web-contents-created',created);
+  if(stopping)return;stopping=true;app.removeListener('web-contents-created',created);ipcMain.removeListener(MENU_CHANNEL,openMenuSettings);nativeTheme.removeListener('updated',syncTheme);
   for(const {w,finish,destroyed}of hooked.values())if(!w.isDestroyed()){w.removeListener('did-finish-load',finish);w.removeListener('destroyed',destroyed);}
+  for(const {w}of hooked.values())if(!w.isDestroyed()&&menuURL(w.getURL()))try{await w.executeJavaScript('window.__tvDesktopWallpaperMenu?.stop()');}catch{}
   for(const w of charts())try{await w.executeJavaScript('window.__tvDesktopWallpaper?.stop()');await repaint(w);}catch{}
   if(settingsWindow&&!settingsWindow.isDestroyed())settingsWindow.close();
   await fs.rm(path.join(data,'runtime.json'),{force:true});server.close();delete global[KEY];
@@ -82,6 +106,7 @@ module.exports=async function install(assets){
    busy=true;
    try{
     if(route==='show'){show();send(res,200,{ok:true});return;}
+    if(route==='hide'){settingsWindow?.hide();send(res,200,{ok:true});return;}
     if(route==='stop'){send(res,200,{ok:true});setTimeout(()=>void stop(),100);return;}
     if(route==='upload'){
      const bytes=await body(req,40*1024*1024),type=sniff(bytes),previous={config,media};
@@ -109,7 +134,9 @@ module.exports=async function install(assets){
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
  base=`http://127.0.0.1:${server.address().port}/${token}/`;
  await fs.writeFile(path.join(data,'runtime.json'),JSON.stringify({pid:process.pid,base}),{mode:0o600});
- global[KEY]={state,show,stop,apply,charts};
+ global[KEY]={version:COMPANION_VERSION,state,show,stop,apply,charts};
+ ipcMain.on(MENU_CHANNEL,openMenuSettings);nativeTheme.on('updated',syncTheme);
+ await Promise.all(webContents.getAllWebContents().filter(w=>!w.isDestroyed()&&menuURL(w.getURL())).map(w=>applyMenu(w)));
  await Promise.all(charts().map(w=>apply(w)));
  show();return state();
 };

@@ -25,3 +25,7 @@ Run `node scripts/check.mjs` and `python3 scripts/build_release.py`. Run Chrome 
 `canvas.js` / `renderer.js` wrap only chart-scoped full-pane Canvas 2D fills. Media layers must ignore pointer events. Keep manifest-referenced filenames case-correct and release ZIPs installable without a build. Source allowlists in `scripts/build_release.py` determine release contents.
 
 Update compatibility and user guides when behavior changes. Use searchable plain-language descriptions such as animated TradingView wallpaper, custom video chart backgrounds, Chrome extension, and actual macOS Desktop companion, without implying vendor affiliation or guaranteed future compatibility.
+
+## Design Context
+
+Desktop wallpaper controls should feel native to TradingView: match its system typography, compact form controls, neutral surfaces, and selected light/dark/system theme. Put Wallpaper settings on a separate full-width row next to Settings in the top-right main menu. Avoid promotional headings, separate companion branding, decorative fonts, and custom palettes. See `.impeccable.md` for the creator’s design direction.

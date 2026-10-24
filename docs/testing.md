@@ -49,3 +49,19 @@ node desktop/qa/test.cjs
 This test temporarily switches wallpaper, exercises removal and reattachment, then restores the saved wallpaper/preferences. It never launches, quits, or reloads TradingView. Do not run it automatically against someone else's active chart session. It uses the generated `desktop/qa/sample.webm` fixture and no third-party dependencies.
 
 Hosted CI is not enabled in this repository. An optional [GitHub Actions example](examples/github-actions.yml) runs only offline source/package checks; a maintainer with workflow permission can copy it into `.github/workflows/`. A passing source/package check is not a live TradingView compatibility certification.
+
+## Desktop menu and appearance update (1.1.1)
+
+The native top-right three-dot menu was checked in the existing Desktop process. The injected row aligned with Settings at the same horizontal position/width and appeared directly below it. Clicking its visible label reopened the redesigned Wallpaper settings window; Done hid it without stopping wallpaper. Process identity, saved media hash, and wallpaper preferences matched the pre-update snapshot.
+
+Isolated Chromium tests cover menu placement inside a horizontal native-style row wrapper (preventing side-by-side placement), clicks, Enter/Space, arrow-key adjacency, idempotence, rerender reinsertion, cleanup, and exclusion from other menu types. Settings tests cover explicit dark appearance with a light system preference, live light-theme updates, all controls fitting the default window, narrow-window containment, long filenames, accessible switches, custom file selection/upload, and Done. The live Desktop check used the current dark appearance; the user’s app theme was not switched for testing.
+
+Run the isolated UI checks without touching Desktop:
+
+```sh
+cd tests/chrome
+npm install
+npx playwright install chromium
+npm run test:desktop-menu
+npm run test:desktop-settings
+```

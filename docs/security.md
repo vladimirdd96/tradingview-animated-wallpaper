@@ -26,3 +26,7 @@ No SIP, Gatekeeper, signature, executable, fuse, app archive, or certificate set
 ## Reporting a problem
 
 For a security issue, use the repository's private security reporting feature if enabled. Otherwise open an issue requesting a private contact route without posting exploit details, tokens, media, or account information. For ordinary bugs, include package, app/browser version, platform, and a minimal reproduction without private data.
+
+## Desktop menu entry
+
+The Wallpaper settings menu item is injected only into the app’s trusted local main-menu document. It sends a dedicated settings-open IPC message. The main process checks the sender and main-menu document before opening the existing settings window; chart pages and other menus are rejected. No controller token, extra remote-page Node access, or arbitrary command route is introduced. Removal also removes the row, observer, IPC listener, and theme listener.

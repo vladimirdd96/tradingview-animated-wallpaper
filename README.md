@@ -25,9 +25,9 @@ Both versions include a built-in animated aurora, wallpaper darkening, fill/cont
 1. Open TradingView Desktop normally and sign in if needed. Leave your existing chart window open.
 2. [Download the Desktop ZIP](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Desktop-Wallpaper.zip) and extract it.
 3. Double-click **Enable Desktop Wallpaper.command** in the extracted folder. [Node.js 22+](https://nodejs.org/) must already be installed.
-4. In **TradingView Desktop Wallpaper**, choose a local video or image. It applies to the chart panes in your current session.
+4. In **Wallpaper settings**, click **Choose file…** to select a local video or image. It applies to the chart panes in your current session.
 
-**To reopen the wallpaper chooser or controls, run the same `.command` file again.** Closing the settings window leaves wallpaper running. After quitting and reopening TradingView, run the launcher again to restore it. The launcher never opens, quits, or restarts TradingView for you.
+**To reopen the wallpaper chooser or controls, click the top-right three-dot menu in Desktop → Wallpaper settings….** Closing the settings window leaves wallpaper running. The window follows TradingView’s dark/light/system appearance. After quitting and reopening TradingView, run the launcher again to restore it. The launcher never opens, quits, or restarts TradingView for you.
 
 Desktop compatibility is verified against **TradingView Desktop 3.4.0 on macOS/Apple Silicon**. This is an unsupported customization: future TradingView or Electron changes may require an update. [Read the Desktop guide](desktop/README.md) before attaching.
 
