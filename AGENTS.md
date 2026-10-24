@@ -18,7 +18,7 @@ Start with `README.md`, `llms.txt`, `docs/compatibility.md`, and the target pack
 
 ## Validation
 
-Run `node scripts/check.mjs` and `python3 scripts/build_release.py`. Run Chrome integration tests from `tests/chrome/` with a temporary profile when needed. Desktop integration tests are in `desktop/qa/`; read `docs/testing.md` first. Do not claim unperformed live checks from CI.
+Run `node scripts/check.mjs` and `python3 scripts/build_release.py`. On macOS, build and verify the beginner app with `python3 scripts/build_release.py --mac-app`. Run Chrome integration tests from `tests/chrome/` with a temporary profile when needed. Desktop integration tests are in `desktop/qa/`; read `docs/testing.md` first. Do not claim unperformed live checks from CI.
 
 ## Files and release layout
 

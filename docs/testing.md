@@ -65,3 +65,15 @@ npx playwright install chromium
 npm run test:desktop-menu
 npm run test:desktop-settings
 ```
+
+## Beginner Mac app release (1.2.0)
+
+- Built the self-contained app with pinned official Node.js 22.23.4 Apple Silicon and Intel runtimes. SHA-256 verification and both runtime code-signature checks passed; Node.js licenses are included.
+- Extracted the actual release ZIP with macOS Archive Utility's underlying `ditto` tool into a path containing spaces. Verified the extracted app's ad hoc integrity seal with `codesign --verify --deep --strict`.
+- Ran its bundled Apple Silicon runtime and launcher with an empty environment except HOME and system-only PATH. No system Node.js, npm, Homebrew, or extra software was used. Runtime reported WebSocket support and attached successfully.
+- Opened the extracted `.app` through Launch Services, equivalent to Finder opening it. Native Wallpaper settings appeared in the already-running Desktop 3.4.0 session. The TradingView PID, saved settings, and SHA-256 hash of the wallpaper were unchanged.
+- The temporary inspector was closed after validation. TradingView was not launched, restarted, reloaded, or logged out.
+- Shell syntax, app AppleScript compilation, source/package checks, ZIP integrity, and documentation links passed. Chrome functionality is unchanged; its packaged help text was simplified.
+- Not tested: Intel execution, a fresh Mac without developer tools, and the downloaded-app Gatekeeper approval flow. The app is ad hoc signed, not Developer ID signed or notarized; the documentation includes Apple's first-open instructions. Do not claim a warning-free installation.
+
+Build the source packages with `python3 scripts/build_release.py`. Build the beginner Mac download on macOS with `python3 scripts/build_release.py --mac-app`; downloads happen during the build only, are pinned to official nodejs.org archives, and fail closed on checksum mismatch. The app itself makes no runtime download.

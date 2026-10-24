@@ -19,3 +19,5 @@ wallpaper.bin*
 
 # Explicitly approved, cropped public demonstration only.
 !docs/media/desktop-demo.gif
+__pycache__/
+*.pyc

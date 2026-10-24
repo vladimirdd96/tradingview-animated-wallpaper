@@ -4,17 +4,18 @@ A free **Manifest V3 Chrome extension** for custom animated chart backgrounds on
 
 For the actual macOS TradingView Desktop application, use the [separate Desktop companion](../desktop/README.md).
 
-## Install in Google Chrome
+## Install — no coding needed
 
-1. [Download the Chrome release ZIP](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Chrome-Wallpaper.zip) and extract it.
-2. Keep the extracted **ChartWallpaper** folder in a permanent location.
-3. Open `chrome://extensions` in Chrome and enable **Developer mode**.
-4. Click **Load unpacked** and select the **ChartWallpaper** folder directly containing `manifest.json`.
-5. Pin **Chart Wallpaper** using Chrome's puzzle-piece menu.
-6. Open or refresh a [TradingView chart](https://www.tradingview.com/chart/). The built-in aurora should appear behind candles.
-7. Open the extension → **Choose custom wallpaper** → choose a local file → **Save wallpaper** → refresh the chart.
+1. **[Download for Chrome](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Chrome-Wallpaper.zip)** and double-click the ZIP to unzip it.
+2. Keep the **ChartWallpaper** folder somewhere permanent, such as Documents.
+3. Open Chrome. Type **chrome://extensions** in the address bar and press Return.
+4. Turn on **Developer mode** at the top right. Click **Load unpacked**, then select the **ChartWallpaper** folder from step 2.
+5. Open or refresh your TradingView chart. An animated background should appear.
+6. Click Chrome’s **puzzle-piece icon → Chart Wallpaper → Choose custom wallpaper**. Pick your video or picture, click **Save wallpaper**, then refresh the chart.
 
-When installing from a cloned repository, select this `chrome-extension/` folder directly. No build step, terminal command, or Chrome Web Store account is required.
+**Tip:** click the pin beside Chart Wallpaper in Chrome’s puzzle-piece menu so its controls stay easy to find.
+
+No Terminal or extra software is needed. Chrome requires these manual steps for this GitHub download; there is no Chrome Web Store listing yet. Keep the folder in place after installing.
 
 ## How to open the wallpaper controls
 

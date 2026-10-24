@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs/promises'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const root=__dirname;
-const COMPANION_VERSION='1.1.1';
+const COMPANION_VERSION='1.2.0';
 const runtimeFile=path.join(require('node:os').homedir(),'Library','Application Support','TradingView','ChartWallpaper','runtime.json');
 async function get(url){return fetch(url,{signal:AbortSignal.timeout(2500)});}
 async function main(){

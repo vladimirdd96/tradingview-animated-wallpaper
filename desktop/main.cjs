@@ -2,7 +2,7 @@
 const fs=require('node:fs/promises'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto');
 const {app,BrowserWindow,webContents,ipcMain,nativeTheme}=require('electron');
 const {pathToFileURL}=require('node:url');
-const COMPANION_VERSION='1.1.1';
+const COMPANION_VERSION='1.2.0';
 const MENU_CHANNEL='tv-wallpaper:open-settings:v1';
 function menuURL(url){
  try{const u=new URL(url);return u.protocol==='file:'&&u.pathname===new URL(pathToFileURL(path.join(app.getAppPath(),'app/menu/index.html')).href).pathname&&JSON.parse(u.searchParams.get('rendererInitialData')).type==='main-menu';}catch{return false;}

@@ -2,6 +2,7 @@
 from pathlib import Path
 import hashlib
 import zipfile
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'dist'
@@ -11,7 +12,7 @@ PACKAGES = {
         'manifest.json', 'canvas.js', 'content.js', 'popup.html', 'popup.js',
         'options.html', 'options.js', 'ui.css', 'README.md', 'LICENSE',
     ]),
-    'TradingView-Desktop-Wallpaper.zip': ('desktop', 'TradingViewDesktopWallpaper', [
+    'TradingView-Desktop-Source.zip': ('desktop', 'TradingViewDesktopWallpaper', [
         'attach.cjs', 'main.cjs', 'renderer.js', 'menu.js', 'index.html', 'ui.js', 'ui.css',
         'Enable Desktop Wallpaper.command', 'README.md', 'LICENSE',
         'qa/evaluate.cjs', 'qa/test.cjs', 'qa/sample.webm',
@@ -38,4 +39,8 @@ for filename, (source, folder, files) in PACKAGES.items():
         assert all('/data/' not in n and not n.endswith(('runtime.json', 'settings.json', 'wallpaper.bin')) for n in archive.namelist())
     checksums.append(hashlib.sha256(target.read_bytes()).hexdigest() + '  ' + filename)
     print('PASS', filename, target.stat().st_size, 'bytes')
+if '--mac-app' in sys.argv:
+    from build_mac_app import build
+    app_zip = build()
+    checksums.append(hashlib.sha256(app_zip.read_bytes()).hexdigest() + '  ' + app_zip.name)
 (OUT / 'SHA256SUMS.txt').write_text('\n'.join(checksums) + '\n')

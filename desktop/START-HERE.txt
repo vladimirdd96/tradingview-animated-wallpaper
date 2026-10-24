@@ -1,0 +1,30 @@
+TRADINGVIEW WALLPAPER — MAC
+
+1. Open TradingView and leave your chart open.
+2. Move TradingView Wallpaper.app to Applications (recommended).
+3. Double-click TradingView Wallpaper.app.
+4. In Wallpaper settings, click Choose file… and pick your video or picture.
+
+That's it. You do not need Terminal or any extra software.
+
+To change it later: TradingView's top-right ⋯ menu → Wallpaper settings…
+After you quit and reopen TradingView: open TradingView Wallpaper again.
+You can keep the app in your Dock for easy access.
+
+FIRST OPEN
+This free app is not notarized by Apple. If macOS blocks it, only if you
+trust this download: System Settings → Privacy & Security → Open Anyway.
+Then open the app again. No security-disabling commands are required.
+Apple's explanation: https://support.apple.com/102445
+
+This app never opens, quits, or restarts TradingView. Your existing login
+stays in place. The runtime it needs is included, used only by this app,
+and is not installed on your system. No administrator password is needed
+by this app; macOS may ask for one when approving a downloaded app.
+
+Tested on macOS / Apple Silicon with TradingView Desktop 3.4.0.
+Intel runtime included, but Intel Macs are not yet tested.
+Windows and Linux: use the Chrome extension instead.
+
+Download/help:
+https://github.com/vladimirdd96/tradingview-animated-wallpaper

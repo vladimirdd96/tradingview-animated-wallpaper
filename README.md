@@ -1,10 +1,34 @@
 # TradingView Animated Wallpaper — Desktop & Chrome
 
-**Free animated chart backgrounds for TradingView Desktop on macOS and TradingView in Google Chrome.** Put your own MP4, WebM, GIF, or image wallpaper behind candlesticks, indicators, and drawings—using local files, with no subscription or account for this tool.
+**Animated wallpapers behind your TradingView charts. Free. No subscription.** Choose your own video or picture, or use the included animated background.
 
-[Download for Desktop](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Desktop-Wallpaper.zip) · [Download for Chrome](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Chrome-Wallpaper.zip) · [Installation guides](#choose-your-version) · [Compatibility](docs/compatibility.md) · [Agent index](llms.txt)
+## Start here
 
-An independent, MIT-licensed project for **TradingView live wallpapers**, **animated candlestick chart backgrounds**, and **custom video wallpapers**. The Desktop companion works inside the actual TradingView Desktop application; it is not a Chrome shortcut or replacement trading client. The Chrome package is a Manifest V3 browser extension.
+### I use the TradingView Desktop app on a Mac
+
+**[Download for Mac](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Desktop-Wallpaper.zip)** — everything included. No Terminal, coding, or extra software to install.
+
+1. Open TradingView and leave your chart open.
+2. Download the ZIP above and double-click it to unzip. Move **TradingView Wallpaper.app** into **Applications**.
+3. Open **TradingView Wallpaper**. In the settings window, click **Choose file…** and pick a video or picture.
+
+**Change it later:** TradingView’s top-right **⋯ → Wallpaper settings…**. After quitting and reopening TradingView, open **TradingView Wallpaper** again. You can keep it in your Dock.
+
+**First-open help:** this app is not notarized by Apple. If macOS blocks it and you trust this download, go to **System Settings → Privacy & Security → Open Anyway**, then open it again. [Apple’s explanation](https://support.apple.com/102445). No commands to disable security are needed.
+
+Tested on Mac / Apple Silicon with TradingView Desktop 3.4.0. An Intel runtime is included, but Intel Macs are not yet tested. Windows and Linux users can use the Chrome version below. [Mac help](desktop/README.md).
+
+### I use TradingView in Google Chrome
+
+**[Download for Chrome](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Chrome-Wallpaper.zip)**
+
+1. Unzip the download and keep the **ChartWallpaper** folder somewhere permanent.
+2. In Chrome, type **chrome://extensions** into the address bar. Turn on **Developer mode** at the top right.
+3. Click **Load unpacked**, then select the **ChartWallpaper** folder.
+4. Open or refresh your TradingView chart. Click Chrome’s **puzzle-piece icon → Chart Wallpaper → Choose custom wallpaper**.
+5. Choose your file, click **Save wallpaper**, then refresh the chart.
+
+Chrome requires these manual installation steps for this GitHub download. There is no Chrome Web Store listing yet. [Chrome help](chrome-extension/README.md).
 
 ## Video demo: actual TradingView Desktop
 
@@ -12,66 +36,14 @@ An independent, MIT-licensed project for **TradingView live wallpapers**, **anim
 
 [Watch or download the 10-second MP4 demo](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/download/v1.1.1/tradingview-desktop-animated-wallpaper-demo.mp4). Recorded from the actual running macOS Desktop app with a user-selected animated wallpaper, cropped to the chart. The original wallpaper file is not included. [Demo details and artwork notice](docs/media/README.md).
 
-## Choose your version
+## What you can control
 
-| | TradingView Desktop companion | Google Chrome extension |
-|---|---|---|
-| Runs in | Actual TradingView Desktop app | TradingView website in Chrome |
-| Platform | macOS; Apple Silicon verified | Chrome 111+; macOS verified |
-| Install | Extract Desktop ZIP; run the `.command` launcher while TradingView is open | Extract Chrome ZIP; Load unpacked in `chrome://extensions` |
-| Wallpaper controls | Native settings window in the running Desktop app | Extension popup and options page |
-| Custom files | MP4, WebM, GIF, WebP, PNG, JPEG; up to 40 MB | Same formats and size limit |
-| Build required | No; needs Node.js 22+ | No; needs Chrome |
-| Guide | [Desktop setup and controls](desktop/README.md) | [Chrome setup and controls](chrome-extension/README.md) |
+- Choose your own video, animated GIF, or picture. MP4, WebM, GIF, WebP, PNG, and JPEG files up to 40 MB work.
+- Darken the wallpaper so candles and labels stay readable.
+- Fill the chart or show the whole picture.
+- Pause video, turn wallpaper off, or switch to the included aurora animation. GIFs cannot be paused.
 
-Both versions include a built-in animated aurora, wallpaper darkening, fill/contain fitting, and pause controls for video and aurora. Audio stays muted. Neither package includes paid wallpaper assets or anime footage.
-
-## Quick start: actual TradingView Desktop on Mac
-
-1. Open TradingView Desktop normally and sign in if needed. Leave your existing chart window open.
-2. [Download the Desktop ZIP](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Desktop-Wallpaper.zip) and extract it.
-3. Double-click **Enable Desktop Wallpaper.command** in the extracted folder. [Node.js 22+](https://nodejs.org/) must already be installed.
-4. In **Wallpaper settings**, click **Choose file…** to select a local video or image. It applies to the chart panes in your current session.
-
-**To reopen the wallpaper chooser or controls, click the top-right three-dot menu in Desktop → Wallpaper settings….** Closing the settings window leaves wallpaper running. The window follows TradingView’s dark/light/system appearance. After quitting and reopening TradingView, run the launcher again to restore it. The launcher never opens, quits, or restarts TradingView for you.
-
-Desktop compatibility is verified against **TradingView Desktop 3.4.0 on macOS/Apple Silicon**. This is an unsupported customization: future TradingView or Electron changes may require an update. [Read the Desktop guide](desktop/README.md) before attaching.
-
-## Quick start: TradingView in Chrome
-
-1. [Download the Chrome ZIP](https://github.com/vladimirdd96/tradingview-animated-wallpaper/releases/latest/download/TradingView-Chrome-Wallpaper.zip) and extract it.
-2. Open `chrome://extensions`, enable **Developer mode**, and click **Load unpacked**.
-3. Select the extracted **ChartWallpaper** folder—the folder directly containing `manifest.json`.
-4. Refresh a [TradingView chart](https://www.tradingview.com/chart/), click the extension icon, and choose **Choose custom wallpaper**.
-
-Select a local file, save it, and refresh the chart. If Chrome says “Manifest file is missing or unreadable,” select the folder containing `manifest.json`, not the ZIP or its parent. [Full Chrome guide](chrome-extension/README.md).
-
-## Features and privacy
-
-- Custom animated video or image wallpaper behind candles; no overlay intercepting chart pointer input.
-- Built-in animation without downloading a wallpaper.
-- Local file storage; no wallpaper upload service, analytics, or cloud account.
-- Darkening, fitting, enable/disable, and pause controls. Animated GIFs cannot be paused.
-- Independent implementation: does not use ChartSkins accounts, source code, paid assets, or subscription checks.
-- No order placement, trading API integration, or changes to account preferences.
-
-Use wallpaper files you are entitled to use. A short H.264 MP4 or VP8/VP9 WebM loop is a practical choice; several 4K video panes can consume substantial GPU and memory.
-
-## How it works
-
-TradingView normally paints an opaque canvas background before drawing chart content. Each package inserts a media layer under chart canvases and intercepts only full-pane background fills. Candles, indicators, drawings, axes, and chart input remain with TradingView.
-
-The Chrome extension installs a chart-scoped MAIN-world Canvas 2D hook and keeps settings handling in an isolated content script. The Desktop companion briefly attaches to the already-running Electron process, installs an in-memory hook, closes the temporary inspector, and hosts a token-protected loopback controller with a native settings window. It does not patch the signed application bundle or disable macOS security protections.
-
-[Architecture](docs/architecture.md) · [Security and permissions](docs/security.md) · [Test scope and commands](docs/testing.md)
-
-## Tested behavior
-
-- Chrome: unpacked extension load, live chart rendering, custom WebM upload and playback, persistence after reload, pause, disable/re-enable, corrupt file rejection, and no reported extension manifest/runtime errors.
-- Desktop: attachment to an existing logged-in Desktop 3.4.0 session, two chart panes, custom video playback, native pause/resume, disable/re-enable, saved settings, removal, and reattachment without restarting the application.
-- Desktop application archive hash remained unchanged; macOS code-signature verification passed.
-
-These are recorded tests, not a promise of compatibility with all future TradingView versions. [Exact environment and limitations](docs/testing.md).
+Your files stay on your computer. Audio is muted. This tool does not place trades or require your TradingView password. No wallpaper library is included; use your own files. Short video loops work best.
 
 ## FAQ
 
@@ -99,17 +71,26 @@ No. The packages modify chart presentation. They do not place orders, execute st
 
 TradingView's built-in chart export may omit the media layer. A full app/window screenshot captures the visible wallpaper.
 
-## Development and agent entry points
+<details>
+<summary>For developers and AI agents</summary>
+
+The Chrome download is a Manifest V3 extension. The Mac app includes official Node.js runtimes; the separate Desktop Source ZIP is for developers who already have Node.js 22+. The Mac app does not install Node.js system-wide, need a package manager, or download code when opened.
+
+The Desktop companion attaches to the already-running TradingView app. It never launches, quits, or restarts TradingView and does not patch its signed app bundle. Rendering hooks may need updates after TradingView changes.
 
 ```sh
 node scripts/check.mjs
 python3 scripts/build_release.py
+# On macOS: also build the self-contained app (downloads verified official runtimes)
+python3 scripts/build_release.py --mac-app
 ```
 
-No third-party dependencies are needed for these source/package checks. Browser integration tests require Playwright; Desktop integration tests require an already-running supported macOS Desktop app. Desktop tests temporarily change wallpaper and restore saved preferences—run them deliberately, not as a background check.
+[Agent guide](AGENTS.md) · [Agent index](llms.txt) · [Architecture](docs/architecture.md) · [Security](docs/security.md) · [Tests](docs/testing.md) · [Compatibility](docs/compatibility.md) · [Contributing](CONTRIBUTING.md)
 
-Start with [AGENTS.md](AGENTS.md), [llms.txt](llms.txt), and [CONTRIBUTING.md](CONTRIBUTING.md). Release assets are built from explicit file lists to exclude local settings, runtime tokens, and user media.
+Release archives use explicit file lists to exclude settings, session tokens, and private media. Only the creator-approved cropped demo is published.
+
+</details>
 
 ## License and affiliation
 
-[MIT License](LICENSE). Not affiliated with, endorsed by, or maintained by TradingView or ChartSkins. Product names belong to their respective owners. TradingView's own plans, platform limits, and terms still apply.
+[MIT License](LICENSE) for project code; bundled Node.js has its own included license. Demo artwork belongs to its rights holders. This independent project is not affiliated with TradingView or ChartSkins. TradingView’s own plans and terms still apply.

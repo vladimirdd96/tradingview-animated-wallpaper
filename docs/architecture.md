@@ -28,7 +28,8 @@ Custom media persists as a data URL in `chrome.storage.local`, then becomes a Bl
 - `desktop/main.cjs`: attach to chart webContents, host restricted local controls, persist settings/media under the app's Application Support directory, and create a sandboxed native settings window.
 - `desktop/menu.js`: add a native-style full-width Wallpaper settings row to the trusted local Desktop main menu, with keyboard access and cleanup. A dedicated IPC event opens settings only when its sender is that menu view. No controller token or Node bridge is added to chart pages.
 - `desktop/renderer.js`: create per-pane media layers, install/restore the drawing wrapper, and handle motion/visibility.
-- `.command` launcher: find local Node.js and invoke the attachment script. It never starts, quits, or restarts TradingView.
+- Mac app: self-contained Finder launcher with official, checksum-verified Node.js runtimes. Opens native wallpaper settings without Terminal; no runtime installation or launch-time downloads.
+- Developer `.command` launcher: find local Node.js and invoke the attachment script. It never starts, quits, or restarts TradingView.
 
 The temporary inspector closes after attachment. The remaining controller has a random-token URL, binds only to `127.0.0.1`, rejects foreign origins and unexpected Host headers, and exposes only wallpaper operations. Closing settings leaves the in-memory companion active. Removing wallpaper detaches lifecycle listeners and restores the renderer. Quitting the app clears the companion from memory.
 
